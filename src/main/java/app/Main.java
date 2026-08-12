@@ -1,8 +1,10 @@
 package app;
 
 import models.Course;
+import models.Enrollment;
 import models.Students;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class Main {
 
         List<Students> students = new ArrayList<>();
         List<Course> courses = new ArrayList<>();
+        List<Enrollment> enrollments = new ArrayList<>();
 
         students.add(new Students(1L, "John", "Smith", "john.smith@email.com", "3001234567"));
         students.add(new Students(2L, "Emily", "Johnson", "emily.johnson@email.com", "3012345678"));
@@ -47,6 +50,24 @@ public class Main {
                             ", Description: " + course.getDescription() +
                             ", Duration: " + course.getDuration() +
                             ", Capacity: " + course.getCapacity()
+            );
+        }
+
+        enrollments.add(new Enrollment(1L, students.get(0), courses.get(0), LocalDate.of(2026, 1, 15), "ACTIVE"));
+        enrollments.add(new Enrollment(2L, students.get(1), courses.get(2), LocalDate.of(2026, 1, 20), "ACTIVE"));
+        enrollments.add(new Enrollment(3L, students.get(2), courses.get(1), LocalDate.of(2026, 2, 1), "COMPLETED"));
+        enrollments.add(new Enrollment(4L, students.get(3), courses.get(4), LocalDate.of(2026, 2, 5), "ACTIVE"));
+        enrollments.add(new Enrollment(5L, students.get(4), courses.get(3), LocalDate.of(2026, 2, 10), "CANCELLED"));
+
+        System.out.println("\nList of enrollments");
+
+        for (Enrollment enrollment : enrollments) {
+            System.out.println(
+                    "ID: " + enrollment.getId() +
+                            ", Student: " + enrollment.getStudent().getFirstname() + " " + enrollment.getStudent().getLastname() +
+                            ", Course: " + enrollment.getCourse().getName() +
+                            ", Enrollment Date: " + enrollment.getEnrollmentDate() +
+                            ", Status: " + enrollment.getStatus()
             );
         }
 
